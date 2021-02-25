@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <time.h>
+#include <string.h>
 #include "library.h"
 #include "member.h"
 #include "rental.h"
 
-void Init();                       //예제 자료 만들기
-void test();                       //임시 테스트
 void Log_In();                     //로그인 기능
 void Member_Join();                //회원가입 기능
 void booklist();                   //도서 UI
@@ -33,17 +32,16 @@ void selectRental();               //대여목록 검색
 void updateRental();               //목록 수정
 void deleteRental();               //목록 삭제
 void selectRental_s(B_Rental *br); //대여목록 상세 검색
-void user(S_Member sm);                       //유저모드
-void bookRental();                 //대여 기능
-void bookReturn();                 //반납 기능
-void updateMember_u();             //회원정보 수정
+void user(S_Member sm);            //유저모드
+void bookRental(S_Member sm);      //대여 기능
+void bookReturn(S_Member sm);      //반납 기능
+void updateMember_u(S_Member psm); //회원정보 수정
 int Rental_Time(int *y, int *m, int *d); //대여 반납 날짜계산
 void Real_Time(int *y, int *m, int *d);  //현재 시간
 
 int main(void) {
 
 	int input = 0;
-	char eorl;
 
 	while (1) {
 
@@ -178,7 +176,7 @@ void rentallist()  //대여 리스트
 
 //메인 UI 기능
 void Log_In() {
-	char id[MAX], pw[MAX], eorl;
+	char id[MAX], pw[MAX];
 	MList ml, log;
 	S_Member sm;
 
@@ -280,7 +278,7 @@ void Member_Join() {
 //관리자
 void manager() {
 	int input = 0;
-	char eorl;
+
 	while (1) {
 		system("cls");
 		manager_ui();
@@ -309,7 +307,6 @@ void manager() {
 void book_m()  //도서 검색 추가 수정 삭제
 {
 	int input = 0;
-	char eorl;
 
 	while (1) {
 		system("cls");
@@ -480,7 +477,6 @@ void insertBook() //도서 정보 입력
 {
 	BList bl;
 	S_Book sb;
-	char eorl;
 
 	BListInit(&bl);
 	BookInit(&sb);
@@ -523,7 +519,6 @@ void deleteBook() //도서 정보 입력
 {
 	BList bl;
 	S_Book sb;
-	char eorl;
 
 	BListInit(&bl);
 	BookInit(&sb);
@@ -608,7 +603,6 @@ void updateBook() {
 void member_m()
 {
 	int input = 0;
-	char eorl;
 
 	while (1) {
 		system("cls");
@@ -756,7 +750,6 @@ void selectMember_s(S_Member *sm) {
 void deleteMember() {
 	MList ml;
 	S_Member sm;
-	char eorl;
 
 	MListInit(&ml);
 	MemberInit(&sm);
@@ -843,7 +836,6 @@ void updateMember() {
 //대여 관리 기능
 void rental_m() {
 	int input = 0;
-	char eorl;
 
 	while (1) {
 		system("cls");
@@ -1001,7 +993,6 @@ void updateRental() {
 void deleteRental() {
 	RList rl;
 	B_Rental br;
-	char eorl;
 
 	RListInit(&rl);
 	RentalInit(&br);
@@ -1058,7 +1049,7 @@ void selectRental_s(B_Rental *br) {
 
 void user(S_Member sm) {
 	int input = 0;
-	char eorl;
+
 	while (1) {
 		system("cls");
 		user_ui();
@@ -1344,7 +1335,7 @@ int Rental_Time(int *y, int *m, int *d) {
 	if (py % 4 == 0 && py % 100 != 0) {
 		day[2] = 29;
 	}
-	else if (py & 400 == 0) {
+	else if ((py & 400) == 0) {
 		day[2] = 29;
 	}
 

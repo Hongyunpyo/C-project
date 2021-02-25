@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "library.h"
 
 int BSearch_num(BList *plist, S_Book *pbook);//ÀÌÁßÅ½»ö

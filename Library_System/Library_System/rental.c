@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "rental.h"
 
 int BSearch_R(RList *plist, B_Rental *pr);//ÀÌÁßÅ½»ö

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "member.h"
 
 int BSearch_M_id(MList *plist, S_Member *pmb);
@@ -57,7 +58,7 @@ S_Member member_delete(MList *plist, S_Member *pmb) {
 		}
 		plist->list_num -= 1;
 	}
-	getch();
+
 	return value;
 }
 
