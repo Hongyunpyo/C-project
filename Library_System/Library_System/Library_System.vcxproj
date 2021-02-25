@@ -119,6 +119,12 @@
     <ClInclude Include="member.h" />
     <ClInclude Include="rental.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="library.c" />
+    <ClCompile Include="main.c" />
+    <ClCompile Include="member.c" />
+    <ClCompile Include="rental.c" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
