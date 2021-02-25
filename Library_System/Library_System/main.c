@@ -369,6 +369,7 @@ void Member_Join() {
 	Load_member(&ml);
 
 	join_ui();
+	printf("ex)123456-1234567\n");
 	printf(" 주민번호를 입력하세요>>");
 	scanf("%s", sm.s_snum);
 
