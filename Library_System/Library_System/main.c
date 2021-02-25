@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <time.h>
-#include <string.h>
 #include "library.h"
 #include "member.h"
 #include "rental.h"
 
+void Init();                       //예제 자료 만들기
 void Log_In();                     //로그인 기능
 void Member_Join();                //회원가입 기능
 void booklist();                   //도서 UI
@@ -32,17 +32,18 @@ void selectRental();               //대여목록 검색
 void updateRental();               //목록 수정
 void deleteRental();               //목록 삭제
 void selectRental_s(B_Rental *br); //대여목록 상세 검색
-void user(S_Member sm);            //유저모드
-void bookRental(S_Member sm);      //대여 기능
-void bookReturn(S_Member sm);      //반납 기능
-void updateMember_u(S_Member psm); //회원정보 수정
+void user(S_Member sm);                       //유저모드
+void bookRental();                 //대여 기능
+void bookReturn();                 //반납 기능
+void updateMember_u();             //회원정보 수정
 int Rental_Time(int *y, int *m, int *d); //대여 반납 날짜계산
 void Real_Time(int *y, int *m, int *d);  //현재 시간
 
 int main(void) {
 
 	int input = 0;
-
+	char eorl;
+	Init();
 	while (1) {
 
 		mainlist();
@@ -64,6 +65,136 @@ int main(void) {
 		_getch();
 	}
 }
+
+//초기 예시 자료 입력함수
+void Init() {
+	S_Book SB;
+	BList BL;
+	S_Member SM;
+	MList ML;
+	B_Rental BR;
+	RList RL;
+	//초기화
+	BookInit(&SB);
+	BListInit(&BL);
+	MemberInit(&SM);
+	MListInit(&ML);
+	RentalInit(&BR);
+	RListInit(&RL);
+
+	//도서 목록 10개
+	for (int i = 0;i < 10;i++) {
+
+		strcpy(SB.book_num, "b00001");
+		strcpy(SB.book_name, "책b");
+		strcpy(SB.book_author, "작가b");
+		strcpy(SB.book_Issue_year, "2021-01-0");
+		strcpy(SB.book_publisher, "출판사b");
+		strcpy(SB.book_rental, "대여가능");
+
+		strcat(SB.book_num, itoa(i));
+		strcat(SB.book_name, itoa(i));
+		strcat(SB.book_author, itoa(i));
+		strcat(SB.book_Issue_year, itoa(i));
+		strcat(SB.book_publisher, itoa(i));
+
+		book_insert(&BL, &SB);
+		BookInit(&SB);
+	}
+	for (int i = 0;i < 10;i++) {
+
+		strcpy(SB.book_num, "a00001");
+		strcpy(SB.book_name, "책a");
+		strcpy(SB.book_author, "작가a");
+		strcpy(SB.book_Issue_year, "2021-01-0");
+		strcpy(SB.book_publisher, "출판사a");
+		strcpy(SB.book_rental, "대여가능");
+
+		strcat(SB.book_num, itoa(i));
+		strcat(SB.book_name, itoa(i));
+		strcat(SB.book_author, itoa(i));
+		strcat(SB.book_Issue_year, itoa(i));
+		strcat(SB.book_publisher, itoa(i));
+
+		book_insert(&BL, &SB);
+		BookInit(&SB);
+	}
+	Save_book(&BL);
+	//관리자 정보 1, 회원 정보 2
+	strcpy(SM.id, "rhksflwk");
+	strcpy(SM.pw, "1q2w3e4r");
+	strcpy(SM.name, "관리자");
+	strcpy(SM.s_snum, "0");
+	strcpy(SM.p_num, "0");
+	strcpy(SM.addr, "0");
+	strcpy(SM.rank, "관리자");
+	member_insert(&ML, &SM);
+
+	for (int i = 0;i < 10;i++) {
+		MemberInit(&SM);
+		strcpy(SM.id, "ghldnjs");
+		strcpy(SM.pw, "1q2w3e4r");
+		strcpy(SM.name, "회원이름");
+		strcpy(SM.s_snum, "123450-123456");
+		strcpy(SM.p_num, "010-1234-234");
+		strcpy(SM.addr, "나의주소는");
+		strcpy(SM.rank, "회원");
+
+		strcat(SM.id, itoa(i));
+		strcat(SM.pw, itoa(i));
+		strcat(SM.name, itoa(i));
+		strcat(SM.s_snum, itoa(i));
+		strcat(SM.p_num, itoa(i));
+		strcat(SM.addr, itoa(i));
+
+		member_insert(&ML, &SM);
+	}
+	Save_member(&ML);
+
+	//랜탈 정보 1개
+	for (int i = 0;i < 5;i++) {
+		for (int j = 0;j < 3;j++) {
+
+			strcpy(BR.user_id, "ghldnjs");
+			strcpy(BR.book_num, "a00001");
+			strcpy(BR.book_name, "책");
+			strcpy(BR.book_rental_day, "2021-2-1");
+			strcpy(BR.book_return_day, "2021-3-1");
+
+			strcat(BR.user_id, itoa(i));
+			strcat(BR.book_num, itoa(j + i));
+			strcat(BR.book_name, itoa(j + i));
+			strcat(BR.book_rental_day, itoa(i));
+			strcat(BR.book_return_day, itoa(i + 14));
+			Rental_insert(&RL, &BR);
+		}
+	}
+
+
+
+
+	Save_rental(&RL);
+
+	Load_book(&BL);
+	Load_member(&ML);
+	Load_rental(&RL);
+	printf("b\n");
+
+	for (int i = 0;i < BL.list_num;i++) {
+		printf("%s\n", BL.booklist[i].book_num);
+	}
+	printf("m\n");
+	for (int i = 0;i < ML.list_num;i++) {
+
+		printf("%s\n", ML.member_list[i].id);
+	}
+	printf("r\n");
+	for (int i = 0;i < RL.list_num;i++) {
+
+		printf("%s\n", RL.rental_list[i].user_id);
+	}
+}
+
 
 //UI
 void mainlist()  //메인 리스트
@@ -176,7 +307,7 @@ void rentallist()  //대여 리스트
 
 //메인 UI 기능
 void Log_In() {
-	char id[MAX], pw[MAX];
+	char id[MAX], pw[MAX], eorl;
 	MList ml, log;
 	S_Member sm;
 
@@ -278,7 +409,7 @@ void Member_Join() {
 //관리자
 void manager() {
 	int input = 0;
-
+	char eorl;
 	while (1) {
 		system("cls");
 		manager_ui();
@@ -307,6 +438,7 @@ void manager() {
 void book_m()  //도서 검색 추가 수정 삭제
 {
 	int input = 0;
+	char eorl;
 
 	while (1) {
 		system("cls");
@@ -477,6 +609,7 @@ void insertBook() //도서 정보 입력
 {
 	BList bl;
 	S_Book sb;
+	char eorl;
 
 	BListInit(&bl);
 	BookInit(&sb);
@@ -519,6 +652,7 @@ void deleteBook() //도서 정보 입력
 {
 	BList bl;
 	S_Book sb;
+	char eorl;
 
 	BListInit(&bl);
 	BookInit(&sb);
@@ -603,6 +737,7 @@ void updateBook() {
 void member_m()
 {
 	int input = 0;
+	char eorl;
 
 	while (1) {
 		system("cls");
@@ -750,6 +885,7 @@ void selectMember_s(S_Member *sm) {
 void deleteMember() {
 	MList ml;
 	S_Member sm;
+	char eorl;
 
 	MListInit(&ml);
 	MemberInit(&sm);
@@ -836,6 +972,7 @@ void updateMember() {
 //대여 관리 기능
 void rental_m() {
 	int input = 0;
+	char eorl;
 
 	while (1) {
 		system("cls");
@@ -993,6 +1130,7 @@ void updateRental() {
 void deleteRental() {
 	RList rl;
 	B_Rental br;
+	char eorl;
 
 	RListInit(&rl);
 	RentalInit(&br);
@@ -1049,7 +1187,7 @@ void selectRental_s(B_Rental *br) {
 
 void user(S_Member sm) {
 	int input = 0;
-
+	char eorl;
 	while (1) {
 		system("cls");
 		user_ui();
@@ -1335,7 +1473,7 @@ int Rental_Time(int *y, int *m, int *d) {
 	if (py % 4 == 0 && py % 100 != 0) {
 		day[2] = 29;
 	}
-	else if ((py & 400) == 0) {
+	else if (py & 400 == 0) {
 		day[2] = 29;
 	}
 

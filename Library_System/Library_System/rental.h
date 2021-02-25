@@ -22,7 +22,7 @@ typedef struct rentar_list {
 
 typedef Rental_List RList;
 
-void RListInit(RList * plist);//대여리스트 초기화 v
+void RListInit(RList * plist);//랜탈리스트 초기화 v
 void RentarInit(B_Rental * pr);//대여도서정보 초기화 v
 void Rental_insert(RList *plist, B_Rental *pmb);//대여도서 추가 v
 B_Rental Rental_delete(RList *plist, B_Rental *pr);//대여도서 삭제 v
