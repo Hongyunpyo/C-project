@@ -43,7 +43,7 @@ int main(void) {
 
 	int input = 0;
 	char eorl;
-	Init();
+
 	while (1) {
 
 		mainlist();
