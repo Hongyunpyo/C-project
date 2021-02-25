@@ -33,9 +33,9 @@ void updateRental();               //목록 수정
 void deleteRental();               //목록 삭제
 void selectRental_s(B_Rental *br); //대여목록 상세 검색
 void user(S_Member sm);                       //유저모드
-void bookRental();                 //대여 기능
-void bookReturn();                 //반납 기능
-void updateMember_u();             //회원정보 수정
+void bookRental(S_Member sm);                 //대여 기능
+void bookReturn(S_Member sm);                 //반납 기능
+void updateMember_u(S_Member psm);             //회원정보 수정
 int Rental_Time(int *y, int *m, int *d); //대여 반납 날짜계산
 void Real_Time(int *y, int *m, int *d);  //현재 시간
 
