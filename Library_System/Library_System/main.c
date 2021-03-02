@@ -41,7 +41,6 @@ void Real_Time(int *y, int *m, int *d);  //현재 시간
 int main(void) {
 
 	int input = 0;
-	char eorl;
 
 	while (1) {
 

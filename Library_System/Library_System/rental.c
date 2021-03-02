@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include "rental.h"
 
-int BSearch_R(RList *plist, B_Rental *pr);//ÀÌÁßÅ½»ö
-int Partition_R(RList *plist, int left, int right, char select[]);//ÄüÁ¤·Ä
-void swap_R(RList *plist, int ch1, int ch2);//ÄüÁ¤·Ä
 
 void RListInit(RList * plist) {
 	plist->list_num = 0;

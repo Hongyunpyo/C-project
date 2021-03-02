@@ -40,4 +40,8 @@ void Quest_book(BList *plist, S_Book *pbook, char select[]); //도서 탐색 v
 int Load_book(BList *plist); //도서 목록 가져오기
 int Save_book(BList *plist); //도서 목록 저장
 
+//자료구조
+int BSearch_num(BList *plist, S_Book *pbook);//이중탐색
+int Partition(BList *plist, int left, int right, char select[]);//퀵정렬
+void swap(BList *plist, int ch1, int ch2);//퀵정렬
 #endif

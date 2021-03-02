@@ -36,6 +36,10 @@ void Quest_rental(RList *plist, B_Rental *pr, char select[]); //대여도서 탐색 v
 int Load_rental(RList *plist); //대여 목록 가져오기
 int Save_rental(RList *plist); //대여 목록 저장
 
+//자료구조
+int BSearch_R(RList *plist, B_Rental *pr);//이중탐색
+int Partition_R(RList *plist, int left, int right, char select[]);//퀵정렬
+void swap_R(RList *plist, int ch1, int ch2);//퀵정렬
 
 #endif
 

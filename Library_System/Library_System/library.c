@@ -1,10 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "library.h"
 
-int BSearch_num(BList *plist, S_Book *pbook);//ÀÌÁßÅ½»ö
-int Partition(BList *plist, int left, int right, char select[]);//ÄüÁ¤·Ä
-void swap(BList *plist, int ch1, int ch2);//ÄüÁ¤·Ä
+
 
 void BListInit(BList * plist) {
 	plist->list_num = 0;

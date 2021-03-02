@@ -2,10 +2,7 @@
 #include <stdlib.h>
 #include "member.h"
 
-int BSearch_M_id(MList *plist, S_Member *pmb);
-int BSearch_M_snum(MList *plist, S_Member *pmb);
-void swap_m(MList *plist, int ch1, int ch2);
-int Partition_m(MList *plist, int left, int right, char select[]);
+
 
 void MListInit(MList * plist) {
 	plist->list_num = 0;
